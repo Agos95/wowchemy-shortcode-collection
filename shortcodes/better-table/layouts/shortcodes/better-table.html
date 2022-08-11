@@ -1,0 +1,113 @@
+<!--
+    Custom version of the "table" shortcode, to allow a deeper configuration and
+    an easier way to target specific class with custom css.
+    The new parameters assign additional bootstrap classes besides the default "table".
+
+    See: https://getbootstrap.com/docs/4.6/content/tables/
+
+    Parameters
+    ----------
+    src : str
+        Path or url to the csv table. Path is relative to the folder where the shortcode is called.
+    delimiter : str, default ","
+        Cell delimiter.
+    header : bool, default true
+        If true, first row is interpreted as the header.
+    caption : str, default ""
+        Caption for the table.
+    striped : bool, default false [NEW]
+        If true, add the class "table-striped", to make alternate rows of different colors.
+    hover : bool, default false
+        If true, add the class "table-hover", to enable a hover state on the current row.
+        [NOTE: when styling with css, "color" attribute work, while "background-color" does not]
+    responsive : bool or str, default false [NEW]
+        If true, it defaults to "md".
+        If a str must be one of ["sm", "md", "lg", "xl"], otherwise it defaults to "md".
+        If not false, add the class "table-responsive-$responsive",
+        to make the table horizontable scrollable under the specified breakpoint.
+    small : bool, default false [NEW]
+        If true, add the class "table-sm", to make the table more compact
+        by cutting cell padding in half.
+    halign : str, default "" [NEW]
+        Horizontal text alignment for the table.
+        If passed, must be one of ["left", "center", "right"], otherwise it defaults to "left".
+
+    Additional changes:
+    - header row is encapsulated inside <thead> tag
+-->
+
+{{/* Table Shortcode for Wowchemy. */}}
+{{/* Load a CSV table from page dir falling back back to remote URL */}}
+{{/* Defaults to expecting a comma-separated CSV with a header row. */}}
+
+{{ $src := .Get "path" }}
+{{ $delimiter := .Get "delimiter" | default "," }}
+{{ $useHeaderRow := (eq (lower (.Get "header")) "true") | default true }}
+{{ $caption := .Get "caption" }}
+
+{{ $is_remote := strings.HasPrefix $src "http" }}
+{{ if not $is_remote }}
+{{ $src = path.Join  "content" $.Page.File.Dir $src }}
+{{ end }}
+{{ $rows := getCSV $delimiter $src }}
+
+<!--
+    Add additional bootstrap classes if requested.
+-->
+{{ $table_class := "table" }}
+{{ if (eq (lower (.Get "striped")) "true") | default false }}
+{{ $table_class = printf "%s table-striped" $table_class }}
+{{ end }}
+{{ if (eq (lower (.Get "hover")) "true") | default false }}
+{{ $table_class = printf "%s table-hover" $table_class}}
+{{ end }}
+{{ $responsive := .Get "responsive" | default false }}
+{{ if $responsive }}
+{{ if not (in "sm md lg xl" $responsive) }}
+{{ $responsive = "md"}}
+{{ end }}
+{{ $table_class = printf "%s table-responsive-%s" $table_class $responsive }}
+{{ end }}
+{{ if (eq (lower (.Get "small")) "true") | default false }}
+{{ $table_class = printf "%s table-sm" $table_class }}
+{{ end }}
+<!--
+    text alignment
+-->
+{{ $halign := .Get "halign" | default ""}}
+{{ if $halign }}
+{{ if not (in "left center right" $halign)}}
+{{ $halign = "left"}}
+{{ end }}
+{{ $halign = printf "text-align:%s;" $halign}}
+{{ end }}
+
+<!--
+    Add bootstrap responsive table class
+    to enable horizontal scrolling in small screens.
+-->
+<table class={{$table_class}} style={{$halign | safeCSS}}>
+    {{ if $useHeaderRow }}
+    {{ $headerRow := index $rows 0 }}
+    {{ $rows = after 1 $rows }}
+    <thead>
+        <tr> {{ range $headerRow }}
+            <th>{{ . | markdownify | emojify }}</th> {{ end }}
+        </tr>
+    </thead>
+    {{ end }}
+    {{ range $rows }}
+    <tr>
+        {{ range . }}
+        {{ if (findRE "^\\d+$" .) }}
+        <td data-table-dtype="number">{{ . }}</td>
+        {{ else }}
+        <td data-table-dtype="text">{{ . | markdownify | emojify }}</td>
+        {{ end }}
+        {{ end }}
+    </tr>
+    {{ end }}
+    {{ if $caption }}
+    <caption>{{ $caption | markdownify | emojify }}</caption>
+    {{ end }}
+</table>
