@@ -13,7 +13,7 @@ Install your shortcode in your site by referencing it at the bottom of your `con
 module:
   imports:
     # your existing imports
-    - path: githib.com/Agos95/wowchemy-shortcode-collection/shortcodes/better-table
+    - path: github.com/Agos95/wowchemy-shortcode-collection/shortcodes/better-table
 ```
 
 ## Parameters
