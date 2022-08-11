@@ -49,3 +49,7 @@ module:
 - **`halign` : *str, default ""***  
     Horizontal text alignment for the table.
     If passed, must be one of ["left", "center", "right"], otherwise it defaults to "left".
+
+## Additional Changes
+
+- Header row is encapsulated inside <thead> tag

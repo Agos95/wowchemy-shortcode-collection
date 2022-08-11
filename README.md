@@ -4,6 +4,5 @@ This is a collection of custom shortcodes for [Wowchemy Website Builder](https:/
 
 ## Widgets
 
-1. [**Better Table**](shortcodes/better-table/) 
-
+1. [**Better Table**](shortcodes/better-table/)  
    Improved version of the base `table` widget, allowing for a deeper configuration of the table.
