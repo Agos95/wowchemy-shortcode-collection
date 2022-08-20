@@ -3,7 +3,12 @@
     an easier way to target specific class with custom css.
     The new parameters assign additional bootstrap classes besides the default "table".
 
-    See: https://getbootstrap.com/docs/4.6/content/tables/
+    Changes:
+    - Header row is encapsulated inside <thead> tag
+    - Additional class can be set using the parameters:
+      table-striped", "table-hover", "table-responsive-XX", "table-sm"
+      See: https://getbootstrap.com/docs/4.6/content/tables/
+    - Paramter for horizontal text alignment
 
     Parameters
     ----------
@@ -31,9 +36,6 @@
     halign : default "" [NEW]
         Horizontal text alignment for the table.
         If passed, must be one of ["left", "center", "right"], otherwise it defaults to "left".
-
-    Additional changes:
-    - header row is encapsulated inside <thead> tag
 -->
 
 {{/* Table Shortcode for Wowchemy. */}}
