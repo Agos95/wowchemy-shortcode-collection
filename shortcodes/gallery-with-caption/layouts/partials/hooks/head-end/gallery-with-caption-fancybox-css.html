@@ -41,6 +41,6 @@
     {{- if hugo.IsProduction -}}
         {{- $style = $style | fingerprint "md5" -}}
     {{- end -}}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 {{ end }}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 <!--unformattedContent-->
