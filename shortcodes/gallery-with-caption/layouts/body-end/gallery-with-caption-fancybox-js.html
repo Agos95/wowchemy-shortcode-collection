@@ -1,0 +1,29 @@
+<!--unformattedContent-->
+{{/* Check if fancybox is already loaded */}}
+{{ $scr := $.Scratch }}
+{{ $js := site.Data.assets.js }}
+{{ $hasFancybox := ( $scr.Get "HasNestedGalleryShortcode") | or site.Params.require_fancybox }}
+
+{{/* Check if there is "gallery-with-caption" shortcode */}}
+{{ $MyShortcodeName := "gallery-with-caption" }}
+{{/* Workaround `.HasShortcode "gallery"` not parsing page resources (widget page sections) */}}
+{{ $hasMyShortcode := false }}
+{{/* Note: unless there is a root `/index.md` with `type: widget_page`, Hugo treats homepage as `page` type. */}}
+{{ if (eq .Type "widget_page") | or (and .IsHome (eq .Type "page")) }}
+    {{/* Check if widget page sections use a gallery */}}
+    {{ $page := "/home/index.md" }}
+    {{ $context := cond .IsHome (site.GetPage $page) . }}
+    {{ range $context.Resources.ByType "page" }}
+        {{ if .HasShortcode $MyShortcodeName }} {{ $hasMyShortcode = true }} {{ end }}
+    {{ end }}
+{{ else }}
+    {{/* Single page */}}
+    {{ if .HasShortcode $MyShortcodeName }} {{ $hasMyShortcode = true }} {{ end }}
+{{ end }}
+
+
+{{/* Add Fancybox if needed */}}
+{{ if (not $hasFancybox | and $hasMyShortcode) }}
+    {{ printf "<script id=\"myjs\" src=\"%s\" integrity=\"%s\" crossorigin=\"anonymous\"></script>" (printf $js.fancybox.url $js.fancybox.version) $js.fancybox.sri | safeHTML }}
+{{ end }}
+<!--unformattedContent-->

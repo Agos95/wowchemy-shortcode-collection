@@ -1,0 +1,23 @@
+// center image and fix figure and figcaption to have multiple images in same row
+.gallery-with-caption {
+    text-align: center;
+
+    // center and align figure and caption
+    figure {
+        display: inline-block;
+
+        figcaption {
+            margin: auto;
+        }
+    }
+
+    // avoid image to be wider than the screen for small viewports
+    // ad also preserve aspect ratio
+    a[data-fancybox] {
+        img {
+            height: auto;
+            width: auto;
+            max-width: 100%;
+        }
+    }
+}

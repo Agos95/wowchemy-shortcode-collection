@@ -10,8 +10,8 @@ In order to be non-breaking with the base `table` shortcut, the default values o
 
 **Table of Contents**
 
-- [Parameters](#parameters)
 - [Changes](#changes)
+- [Parameters](#parameters)
 - [How to use the shortcode](#how-to-use-the-shortcode)
     - [Add the shortcode to your site](#add-the-shortcode-to-your-site)
     - [Use the shortcode in page content](#use-the-shortcode-in-page-content)
@@ -19,6 +19,14 @@ In order to be non-breaking with the base `table` shortcut, the default values o
 - [Screenshots](#screenshots)
 
 ---
+
+## Changes
+
+- Header row is encapsulated inside `<thead>` tag
+- Additional class can be set using the parameters:
+    `"table-striped"`, `"table-hover"`, `"table-responsive-XX"`, `"table-sm"`.
+    See: https://getbootstrap.com/docs/4.6/content/tables/
+- Parameter for horizontal text alignment
 
 ## Parameters
 
@@ -53,14 +61,6 @@ In order to be non-breaking with the base `table` shortcut, the default values o
 - **`halign` : *default "left"***  
     Horizontal text alignment for the table.
     If passed, must be one of ["left", "center", "right"], otherwise it defaults to "left".
-
-## Changes
-
-- Header row is encapsulated inside `<thead>` tag
-- Additional class can be set using the parameters:
-    `"table-striped"`, `"table-hover"`, `"table-responsive-XX"`, `"table-sm"`.
-    See: https://getbootstrap.com/docs/4.6/content/tables/
-- Parameter for horizontal text alignment
 
 ## How to use the shortcode
 

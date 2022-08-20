@@ -16,3 +16,8 @@ I hope to add more shortcodes in the future, since I just started to experiment 
 |                      Small                       |                      Hover                       |
 | :----------------------------------------------: | :----------------------------------------------: |
 | ![table small](img/better-table/table-small.png) | ![table hover](img/better-table/table-hover.png) |
+
+2. [*Gallery with Caption*](shortcodes/gallery-with-caption/)  
+Custom version of the `gallery` shortcode to display the caption even outside the fancybox and to fix some other issues I found with the base one. Additional parameters are also available.
+
+![gallery-with-caption](img/gallery-with-caption/gallery-with-caption.png)
