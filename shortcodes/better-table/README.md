@@ -11,7 +11,7 @@ In order to be non-breaking with the base `table` shortcut, the default values o
 **Table of Contents**
 
 - [Parameters](#parameters)
-- [Additional Changes](#additional-changes)
+- [Changes](#changes)
 - [How to use the shortcode](#how-to-use-the-shortcode)
     - [Add the shortcode to your site](#add-the-shortcode-to-your-site)
     - [Use the shortcode in page content](#use-the-shortcode-in-page-content)
@@ -22,41 +22,45 @@ In order to be non-breaking with the base `table` shortcut, the default values o
 
 ## Parameters
 
-- **`src` : *str***  
+- **`src` :**  
     Path or url to the csv table. Path is relative to the folder where the shortcode is called.
 
-- **`delimiter` : *str, default ","***  
+- **`delimiter` : *default ","***  
     Cell delimiter.
 
-- **`header` : bool, default true**  
-    If true, first row is interpreted as the header.
+- **`header` : default "true"**  
+    If "true", first row is interpreted as the header.
 
-- **`caption` : *str, default ""***  
+- **`caption` : *optional***  
     Caption for the table.
 
-- **`striped` : *bool, default false***  
-    If true, add the class `table-striped`, to make alternate rows of different colors.
+- **`striped` : *default "false"***  
+    If "true", add the class `table-striped`, to make alternate rows of different colors.
 
-- **`hover` : *bool, default false***  
-    If true, add the class `table-hover`, to enable a hover state on the current row.  
+- **`hover` : *default "fals"e***  
+    If "true", add the class `table-hover`, to enable a hover state on the current row.  
     *[**NOTE**: when styling with css, "color" attribute work, while "background-color" does not]*
 
-- **`responsive` : *bool or str, default false***  
-    If true, it defaults to "md".
+- **`responsive` : *default "false"***  
+    If "true", it defaults to "md".
     If a str must be one of ["sm", "md", "lg", "xl"], otherwise it defaults to "md".
     If not false, add the class `table-responsive-$responsive`,
     to make the table horizontable scrollable under the specified breakpoint.
 
-- **`small` : *bool, default false***  
-    If true, add the class `table-sm`, to make the table more compact by cutting cell padding in half.
+- **`small` : *default false***  
+    If "true", add the class `table-sm`, to make the table more compact by cutting cell padding in half.
 
-- **`halign` : *str, default ""***  
+- **`halign` : *default "left"***  
     Horizontal text alignment for the table.
     If passed, must be one of ["left", "center", "right"], otherwise it defaults to "left".
 
-## Additional Changes
+## Changes
 
-- Header row is encapsulated inside <thead> tag
+- Header row is encapsulated inside `<thead>` tag
+- Additional class can be set using the parameters:
+    `"table-striped"`, `"table-hover"`, `"table-responsive-XX"`, `"table-sm"`.
+    See: https://getbootstrap.com/docs/4.6/content/tables/
+- Parameter for horizontal text alignment
 
 ## How to use the shortcode
 
