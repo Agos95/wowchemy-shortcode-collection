@@ -3,7 +3,7 @@
 Custom version of the `gallery` shortcode, in order to fix some issues I encountered with the base shortcode.  
 In particular, this shortcode displays the caption even outside the fancybox. In addition, all the gallery items are center-aligned, so if you have a row with less images than the others, those pictures are centered (instead of being on the left).
 
-For Wowchemy versions from v5.6, the required Fancybox css and javascript is loaded only on the pages where the shortcode is called by using the Hook system.
+For Wowchemy versions from v5.6, you can use Hooks to load the required Fancybox css and javascript only on the pages where the shortcode is called.
 
 ---
 
@@ -13,7 +13,7 @@ For Wowchemy versions from v5.6, the required Fancybox css and javascript is loa
 - [Parameters](#parameters)
 - [How to use the shortcode](#how-to-use-the-shortcode)
     - [Add the shortcode to your site](#add-the-shortcode-to-your-site)
-    - [Enable Fancybox (only on Wowchemy versions prior to v5.6)](#enable-fancybox-only-on-wowchemy-versions-prior-to-v56)
+    - [Enable Fancybox](#enable-fancybox)
     - [Use the shortcode in page content](#use-the-shortcode-in-page-content)
     - [Customization](#customization)
 - [Screenshots](#screenshots)
@@ -66,9 +66,12 @@ module:
     - path: github.com/Agos95/wowchemy-shortcode-collection/shortcodes/gallery-with-caption
 ```
 
-### Enable Fancybox (only on Wowchemy versions prior to v5.6)
+### Enable Fancybox
 
-This shortcode makes use of [Wowchemy Hooks](https://wowchemy.com/docs/hugo-tutorials/extending-wowchemy/#hooks) to include Fancybox css and javascript only on the pages where the shortcode is called. Hooks are supported from version v5.6.  
+- **v5.6 and above**  
+This shortcode can use [Wowchemy Hooks](https://wowchemy.com/docs/hugo-tutorials/extending-wowchemy/#hooks) to include Fancybox css and javascript only on the pages where the shortcode is called. Hooks are supported from version v5.6. To use them, copy the files in `layouts/partials/hooks/body-end` and `layouts/partials/hooks/head-end` in your site folder (create the directories if not present).
+
+- **Older versions**  
 If you are on older versions, you can add `require_fancybox: true` to your `_config/defaults/params.yaml` file. In this way Fancybox is included in all your site pages (even if there is no `gallery` or `gallery-with-caption` shortcode). You should also be able to activate it per page by adding `require_fancybox: true` in the frontmatter (*I did not test this*).
 
 ### Use the shortcode in page content
